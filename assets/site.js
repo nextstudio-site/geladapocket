@@ -69,7 +69,11 @@
           en.target.classList.add('-in');
           io.unobserve(en.target);
         });
-      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 })
+      /* A margem positiva embaixo dispara a entrada enquanto o elemento ainda
+         está fora da tela, para a animação terminar por volta da hora em que
+         ele é lido. Com margem negativa a foto só começava a aparecer depois
+         de já estar na tela, e a espera passava por imagem carregando. */
+      }, { rootMargin: '0px 0px 25% 0px', threshold: 0 })
     : null;
 
   if (io) $$('[data-reveal]').forEach(function (el) { io.observe(el); });
