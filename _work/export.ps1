@@ -1,3 +1,5 @@
+# Este script ainda grava JPEG, mas o site serve WebP (assets/*.webp). Depois
+# de rodar, converta a saída antes de publicar — o HTML só aponta para .webp.
 Add-Type -AssemblyName System.Drawing
 $ErrorActionPreference = "Stop"
 

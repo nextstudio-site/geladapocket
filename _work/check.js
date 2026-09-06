@@ -49,6 +49,13 @@ const MARK = '/' + '*CATALOG*' + '/';
 let totalItems = 0;
 const problems = [];
 
+/* Os links do site são sem extensão. O GitHub Pages resolve /adega/gins para
+   adega/gins.html (e um diretório para o index.html dele), então o mesmo
+   caminho que o servidor aceita é o que conta como link válido aqui. */
+const resolves = (p) =>
+  fs.existsSync(p) ||
+  (!path.extname(p) && (fs.existsSync(p + '.html') || fs.existsSync(path.join(p, 'index.html'))));
+
 pages.forEach((rel) => {
   const html = fs.readFileSync(path.join(root, rel), 'utf8');
   const dir = path.dirname(path.join(root, rel));
@@ -58,7 +65,7 @@ pages.forEach((rel) => {
     .forEach((m) => {
       const target = m[1].split('#')[0];
       if (!target) return;
-      if (!fs.existsSync(path.resolve(dir, target))) problems.push(rel + ' → ' + m[1]);
+      if (!resolves(path.resolve(dir, target))) problems.push(rel + ' → ' + m[1]);
     });
 
   /* O bloco de dados tem de parsear do mesmo jeito que a página parseia. */

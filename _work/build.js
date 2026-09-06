@@ -40,7 +40,7 @@ const FOOT = slice('</main>', '<script type="application/json"', 'rodapé');
 const rebase = (html) =>
   html
     .replace(/(href|src)="(?!https?:|\/\/|#|data:|mailto:|tel:|\.\.\/)([^"]+)"/g, '$1="../$2"')
-    .replace(/href="#([^"]*)"/g, 'href="../index.html#$1"');
+    .replace(/href="#([^"]*)"/g, 'href="../#$1"');
 
 const TOP_SUB = rebase(TOP);
 const FOOT_SUB = rebase(FOOT);
@@ -64,7 +64,7 @@ const page = ({ title, desc, body, data }) => `<!doctype html>
 <meta name="robots" content="index,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,300..900;1,62..125,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@74..108,300..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23f2ece1'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='21' font-weight='700' text-anchor='middle' fill='%230a0908'%3EG%3C/text%3E%3C/svg%3E">
 </head>
@@ -79,7 +79,7 @@ ${body}
 ${FOOT_SUB}
 
 <script type="application/json" id="catData">${MARK}${JSON.stringify(data || { topics: [], items: [] })}${MARK}</script>
-<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+<script src="../assets/lenis.min.js" defer></script>
 <script src="../assets/site.js" defer></script>
 </body>
 </html>
@@ -102,7 +102,7 @@ const slug = (s) =>
 const shelf = ({ title, lede, items, note }) => `
 <section class="section cat -sub">
   <div class="wrap">
-${BACK('../index.html#adega', 'Todas as categorias')}
+${BACK('../#adega', 'Todas as categorias')}
 
     <div class="shead">
       <div>
@@ -132,7 +132,7 @@ ${BACK('../index.html#adega', 'Todas as categorias')}
 
     <div class="menu__foot">
       <p class="menu__note">${esc(note)}</p>
-      <a class="btn" href="todos.html">Ver os ${catalog.items.length} rótulos</a>
+      <a class="btn" href="todos">Ver os ${catalog.items.length} rótulos</a>
     </div>
   </div>
 </section>`;
@@ -145,7 +145,7 @@ catalog.cats.forEach((c) => {
   const items = catalog.items.filter((it) => it.c === c);
   if (!items.length) return;
   const file = slug(c) + '.html';
-  topics.push({ c, n: items.length, i: items[0].i, href: 'adega/' + file });
+  topics.push({ c, n: items.length, i: items[0].i, href: 'adega/' + slug(c) });
 
   fs.writeFileSync(path.join(root, 'adega', file), page({
     title: c,
@@ -185,7 +185,7 @@ const infoPage = (slugName, { title, html }, extra) => {
     body: `
 <section class="section -sub">
   <div class="wrap">
-${BACK('../index.html', 'Voltar ao site')}
+${BACK('../', 'Voltar ao site')}
     <div class="prose">
       <p class="eyebrow">Informações</p>
       <h1>${esc(title)}</h1>
