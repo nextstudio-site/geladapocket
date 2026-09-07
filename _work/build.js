@@ -59,7 +59,7 @@ const page = ({ title, desc, body, data }) => `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0908">
-<title>${esc(title)} — Gelada Pocket Club</title>
+<title>${esc(title)} · Gelada Pocket Club</title>
 <meta name="description" content="${esc(desc)}">
 <meta name="robots" content="index,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,7 +152,7 @@ catalog.cats.forEach((c) => {
     desc: `${items.length} rótulos de ${c.toLowerCase()} na adega do Gelada Pocket Club, com entrega no Tatuapé em 25 a 40 minutos.`,
     body: shelf({
       title: c,
-      lede: `${items.length} ${items.length === 1 ? 'rótulo' : 'rótulos'} nesta prateleira. Toca no + para jogar no carrinho — a conta fecha no WhatsApp.`,
+      lede: `${items.length} ${items.length === 1 ? 'rótulo' : 'rótulos'} nesta prateleira. Toca no + para jogar no carrinho: a conta fecha no WhatsApp.`,
       items,
       note: 'Preços conforme o catálogo da loja. Confirmamos estoque antes de sair.',
     }),
@@ -175,7 +175,7 @@ fs.writeFileSync(path.join(root, 'adega', 'todos.html'), page({
 /* ── Páginas de informações ───────────────────────────────────────────── */
 const CONFLITO = `<p class="prose__note"><strong>Nota:</strong> este texto veio do
   catálogo da loja e ainda fala em prazos de entrega por transportadora. Para o
-  balcão do Tatuapé valem os prazos da página inicial — de 25 a 40 minutos, das
+  balcão do Tatuapé valem os prazos da página inicial: de 25 a 40 minutos, das
   11h às 23h. Vale revisar com o jurídico antes de publicar.</p>`;
 
 const infoPage = (slugName, { title, html }, extra) => {
@@ -207,7 +207,7 @@ infoPage('contato', {
   title: 'Informações de contato',
   html: `
       <h3>Onde a gente fica</h3>
-      <p>Rua Nova Jerusalém, 818 — Tatuapé, São Paulo — SP.</p>
+      <p>Rua Nova Jerusalém, 818 · Tatuapé, São Paulo · SP.</p>
 
       <h3>Horário</h3>
       <p>Todos os dias, das 11h às 23h.</p>

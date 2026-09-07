@@ -383,10 +383,10 @@
     if (open) {
       var left = CLOSE - t;
       label = left <= 1 ? 'Fechando em breve' : 'Aberto agora';
-      line = 'Aberto agora — fecha às 23h.';
+      line = 'Aberto agora, fecha às 23h.';
     } else {
       label = 'Fechado';
-      line = t < OPEN ? 'Fechado — abre hoje às 11h.' : 'Fechado — abre amanhã às 11h.';
+      line = t < OPEN ? 'Fechado, abre hoje às 11h.' : 'Fechado, abre amanhã às 11h.';
     }
     ['#status', '#statusM'].forEach(function (sel) {
       var el = $(sel);
@@ -573,7 +573,7 @@
   var message = function () {
     var lines = ['Olá! Quero fazer um pedido pelo site:', ''];
     cart.forEach(function (l) {
-      lines.push('• ' + l.q + 'x ' + l.n + ' — ' + brl(l.p * l.q));
+      lines.push('• ' + l.q + 'x ' + l.n + ': ' + brl(l.p * l.q));
     });
     lines.push('', 'Subtotal: ' + brl(total()));
     lines.push(total() >= FREE_FROM
@@ -625,7 +625,7 @@
     cartSum.textContent = brl(t);
     cartShip.innerHTML = '';
     if (t >= FREE_FROM) {
-      cartShip.textContent = 'Frete grátis — o pedido passou de R$ 500,00.';
+      cartShip.textContent = 'Frete grátis: o pedido passou de R$ 500,00.';
     } else if (t > 0) {
       cartShip.textContent = 'Faltam ' + brl(FREE_FROM - t) + ' para o frete sair de graça.';
     } else {
